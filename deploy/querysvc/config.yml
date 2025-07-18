@@ -4,7 +4,7 @@ cockroach:
 
 clickhouse:
   # same CH instance used for Processor
-  dsn: "tcp://clickhouse:9000?database=default"
+  dsn: "tcp://clickhouse:9000?username=default&password=&database=default"
 
 cassandra:
   hosts:
