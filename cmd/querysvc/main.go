@@ -18,7 +18,10 @@ import (
 )
 
 type config struct {
-	Cockroach  struct{ Dsn string }
+	Cockroach struct{ Dsn string }
+	Cassandra struct {
+		Hosts []string
+	}
 	ClickHouse struct{ Dsn string }
 	Server     struct {
 		Port   string
@@ -90,9 +93,18 @@ func main() {
 	defer chDB.Close()
 
 	// Cassandra (detail)
-	cassSess, err := lib.NewCassandraSession([]string{"cassandra:9042"})
+	cassHosts := viper.GetStringSlice("cassandra.hosts")
+	var cassSess *gocql.Session
+	for i := 0; i < 30; i++ {
+		cassSess, err = lib.NewCassandraSession(cassHosts)
+		if err == nil {
+			break
+		}
+		zapLog.Warn("cassandra connect failed, retrying...", zap.Error(err), zap.Int("attempt", i+1))
+		time.Sleep(time.Second)
+	}
 	if err != nil {
-		zapLog.Fatal("cassandra connect", zap.Error(err))
+		zapLog.Fatal("cassandra connect failed after retries", zap.Error(err))
 	}
 	defer cassSess.Close()
 

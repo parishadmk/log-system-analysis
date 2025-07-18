@@ -17,6 +17,8 @@ services:
     environment:
       CASSANDRA_CLUSTER_NAME: "log-cluster"
       CASSANDRA_START_RPC: "true"
+    networks:
+      - default
 
   clickhouse:
     image: clickhouse/clickhouse-server:latest

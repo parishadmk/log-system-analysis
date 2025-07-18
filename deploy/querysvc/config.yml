@@ -6,6 +6,10 @@ clickhouse:
   # same CH instance used for Processor
   dsn: "tcp://clickhouse:9000?database=default"
 
+cassandra:
+  hosts:
+    - "cassandra"   
+
 server:
   port: "8082"
   jwt_key: "parishadkey"
