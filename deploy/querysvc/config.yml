@@ -1,0 +1,11 @@
+cockroach:
+  # same CRDB used for AuthSvc
+  dsn: "postgresql://root@cockroach:26257/defaultdb?sslmode=disable"
+
+clickhouse:
+  # same CH instance used for Processor
+  dsn: "tcp://clickhouse:9000?database=default"
+
+server:
+  port: "8082"
+  jwt_key: "parishadkey"

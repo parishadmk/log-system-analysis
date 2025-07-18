@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package query;
+
+import "log_ingest.proto";  // ← bring in LogPayload
+
+option go_package = "github.com/parishadmk/log-system-analysis/internal/api/query";
+  
+service QueryService {
+  rpc SearchEvents(SearchRequest) returns (SearchResponse);
+  rpc GetEventDetail(EventDetailRequest) returns (EventDetailResponse);
+}
+
+message SearchRequest {
+  string project_id = 1;
+  string token      = 2; // JWT
+  map<string,string> filters = 3;
+}
+
+message EventSummary {
+  string name       = 1;
+  int64  last_seen  = 2;
+  int64  count      = 3;
+}
+
+message SearchResponse {
+  repeated EventSummary events = 1;
+}
+
+message EventDetailRequest {
+  string project_id = 1;
+  string token      = 2;
+  string event_name = 3;
+  string cursor     = 4; // optional paging cursor
+}
+
+message EventDetailResponse {
+  string cursor = 1;
+  // qualify with the package from log_ingest.proto
+  ingest.LogPayload entry = 2;
+}

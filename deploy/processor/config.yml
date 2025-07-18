@@ -1,0 +1,18 @@
+kafka:
+  brokers:
+    - "kafka:9092"
+  topic: "logs_raw"
+  group: "log-processor-group"
+
+cassandra:
+  hosts:
+    - "cassandra:9042"
+
+clickhouse:
+  dsn: "tcp://clickhouse:9000?database=default"
+
+processor:
+  ttl_seconds: 2592000  # 30 days
+
+metrics:
+  port: "9100"

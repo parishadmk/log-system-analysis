@@ -1,0 +1,8 @@
+cockroach:
+  # points at your CockroachDB container
+  dsn: "postgresql://root@cockroach:26257/defaultdb?sslmode=disable"
+
+server:
+  # the port this service will listen on
+  port: "8080"
+  jwt_key: "parishadkey"

@@ -1,0 +1,27 @@
+syntax = "proto3";
+package auth;
+
+option go_package = "github.com/parishadmk/log-system-analysis/internal/api/auth";
+
+service AuthService {
+  rpc Login(LoginRequest) returns (LoginResponse);
+  rpc ValidateApiKey(ApiKeyRequest) returns (ApiKeyResponse);
+}
+
+message LoginRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message LoginResponse {
+  string token = 1; // JWT
+}
+
+message ApiKeyRequest {
+  string project_id = 1;
+  string api_key    = 2;
+}
+
+message ApiKeyResponse {
+  bool valid = 1;
+}

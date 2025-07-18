@@ -1,0 +1,11 @@
+{
+  "project_id": "00492e27-282c-405b-9349-927d525b5706",
+  "api_key":    "my-demo-api-key-123",
+  "payload": {
+    "name":      "test_event",
+    "timestamp": 1752852234000000000,
+    "data": {
+      "foo": "bar"
+    }
+  }
+}

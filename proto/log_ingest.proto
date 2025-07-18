@@ -1,0 +1,24 @@
+syntax = "proto3";
+package ingest;
+
+option go_package = "github.com/parishadmk/log-system-analysis/internal/api/ingest";
+
+service IngestService {
+  rpc SendLog(LogRequest) returns (LogResponse);
+}
+
+message LogRequest {
+  string project_id = 1;
+  string api_key    = 2;
+  LogPayload payload = 3;
+}
+
+message LogPayload {
+  string name      = 1;
+  int64  timestamp = 2; // Unix nanos
+  map<string,string> data = 3;
+}
+
+message LogResponse {
+  bool accepted = 1;
+}

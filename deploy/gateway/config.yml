@@ -1,0 +1,12 @@
+kafka:
+  brokers:
+    - "kafka:9092"
+  topic: "logs_raw"
+
+authsvc:
+  # gRPC address of the Auth Service
+  address: "authsvc:8080"
+
+server:
+  # HTTP port for this gateway
+  port: "8081"
